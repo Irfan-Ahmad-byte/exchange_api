@@ -1,0 +1,46 @@
+services:
+  web:
+    build: .
+    container_name: exchange_app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/exchange
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - ./app/configs/.env
+    networks:
+      - exchange_network
+
+  db:
+    image: postgres:17.4
+    container_name: exchange_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: exchange
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+    env_file:
+      - ./app/configs/.env
+    networks:
+      - exchange_network
+
+
+volumes:
+  pgdata:
+
+networks:
+  exchange_network:
+    driver: bridge
