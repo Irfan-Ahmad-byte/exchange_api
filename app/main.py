@@ -25,11 +25,11 @@ async def lifespan(app: FastAPI):
     print("Shutting down...")
 
 
-app = FastAPI(title="Authentication micro-service", version="1.0.0", lifespan=lifespan)
+app = FastAPI(title="Currency Exchange micro-service", version="1.0.0", lifespan=lifespan)
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to Authentication API"}
+    return {"message": "Welcome to Exchange API"}
 @app.get("/health")
 async def health():
     return {"status": "healthy"}
