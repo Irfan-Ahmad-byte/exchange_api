@@ -15,4 +15,4 @@ RUN pip install psycopg2-binary
 COPY . .
 
 # Run FastAPI with Gunicorn and Uvicorn worker
-CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "app.main:app", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "app.main:app", "--bind", "0.0.0.0:7000"]

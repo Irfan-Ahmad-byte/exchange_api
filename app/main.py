@@ -44,8 +44,10 @@ async def verify_api_call(request: Request, call_next):
     api_secret = request.headers.get("X-API-Secret")
     
     if api_key is None or api_key != settings.API_KEY:
+        logger.error("Invalid API Key")
         raise HTTPException(status_code=401, detail="Invalid API Key")
     if api_secret is None or api_secret != settings.API_SECRET:
+        logger.error("Invalid API Secret")
         raise HTTPException(status_code=401, detail="Invalid API Secret")
     
     response = await call_next(request)

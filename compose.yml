@@ -3,7 +3,7 @@ services:
     build: .
     container_name: exchange_app
     ports:
-      - "8000:8000"
+      - "7000:7000"
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/exchange
     volumes:
@@ -15,6 +15,7 @@ services:
       - ./app/configs/.env
     networks:
       - exchange_network
+      - shared_network
 
   db:
     image: postgres:17.4
@@ -24,7 +25,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: exchange
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -44,3 +45,6 @@ volumes:
 networks:
   exchange_network:
     driver: bridge
+  shared_network:
+    external: true
+    name: shared_network

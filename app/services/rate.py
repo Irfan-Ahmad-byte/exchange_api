@@ -1,7 +1,7 @@
 import requests
 from typing import Optional
 
-from app.configs.configs import Configs
+from app.configs.configs import settings
 
 
 
@@ -16,8 +16,8 @@ def get_conversion_rate(currency: str) -> Optional[float]:
         Optional[float]: Conversion rate against USDt if successful, otherwise None.
     """
     # Read API details from environment variables
-    base_url = Configs.COIN_MARKET_CAP_URL
-    api_key = Configs.COIN_MARKET_CAP_API_KEY
+    base_url = settings.COIN_MARKET_CAP_URL
+    api_key = settings.COIN_MARKET_CAP_API_KEY
 
     if not api_key:
         raise ValueError("API key for CoinMarketCap is not set in environment variables.")

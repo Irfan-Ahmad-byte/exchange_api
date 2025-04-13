@@ -26,6 +26,8 @@ class Configs(BaseSettings):
     PROJECT_NAME: str = "Exchange Service"
     API_KEY: str
     API_SECRET: str
+    COIN_MARKET_CAP_API_KEY: str
+    COIN_MARKET_CAP_URL: str = "https://pro-api.coinmarketcap.com"
 
     # Other configurations can be added here
 
